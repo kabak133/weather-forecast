@@ -1,18 +1,29 @@
-import Vue from 'vue';
-import App from './App.vue';
-import store from './store';
+import Vue from 'vue'
+import App from './App.vue'
+import store from './store/'
 
-import 'element-ui/lib/theme-chalk/index.css';
-import 'bootstrap/scss/bootstrap-grid.scss';
+import 'bootstrap/scss/bootstrap-reboot.scss'
+import 'bootstrap/scss/bootstrap-grid.scss'
 
-import {Input, Button} from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.use(Input);
-Vue.use(Button);
+import './assets/scss/main.scss'
 
-Vue.config.productionTip = false;
+
+import { Input, Button, Tabs, TabPane } from 'element-ui'
+
+Vue.use(Input)
+Vue.use(Button)
+Vue.use(Tabs)
+Vue.use(TabPane)
+
+import Location from './services/CurrentLocation'
+
+Location.init()
+
+Vue.config.productionTip = false
 
 new Vue({
   store,
   render: h => h(App)
-}).$mount('#app');
+}).$mount('#app')
