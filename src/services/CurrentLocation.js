@@ -13,15 +13,12 @@ const Location = {
         duration: 5 * 1000
       })
     }
-    console.log('navigator.geolocation', navigator.geolocation)
   },
-
   setFitstData () {
     // Set firs data if Geolocate is enable
     store.dispatch('weather/SelectedLocationWeather', 'London')
   },
   showPosition ({coords}) {
-    console.log('gggg')
     const latLng = {
       lat: coords.latitude,
       lng: coords.longitude

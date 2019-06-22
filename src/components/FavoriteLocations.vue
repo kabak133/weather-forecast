@@ -1,25 +1,23 @@
 <template>
-  <div class="favorite-wpp">
-    <el-card class="box-card">
-
+  <div class="favorite-wp">
+    <h3>Favorite Location</h3>
+    <el-card class="box-card mb-3"
+             v-for="(itm, key) of favoriteLocation"
+             :key="key"
+    >
       <simple-location-weather
-          v-for="itm in ttt"
-          :weather-data="itm"
-          :key="itm.id"
-          :icon-src="itm.condition.icon">
-        <div slot="name">{{itm.name}}</div>
-        <div slot="temp">{{itm.temp_c}}°c</div>
-        <div slot="temp_feel">Feels like {{itm.feelslike_c}}°c</div>
-
+          :icon-src="itm.current.condition.icon">
+        <div slot="name"><b>{{itm.location.name}}</b></div>
+        <div slot="temp">{{itm.current.temp_c}}°c</div>
+        <div slot="temp_feel">Feels like {{itm.current.feelslike_c}}°c</div>
       </simple-location-weather>
-
     </el-card>
 
   </div>
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 import simpleLocationWeather from '@/slots/simpleLocationWeather'
 
 export default {
@@ -27,18 +25,25 @@ export default {
   components: {
     simpleLocationWeather
   },
+  computed:{
+    ...mapGetters({
+      favoriteLocation: 'searchLocate/getFavoriteLocation'
+    })
+  },
+  watch:{
+    getFavoriteLocation:{
+      handler: function (val, oldVal) {
+        console.log('watch')
+        console.log('val', val)
+        console.log('oldVal',oldVal)
+        this.favorites = val
+      },
+      deep: true
+    }
+  },
   data () {
     return {
-      ttt: [
-        {
-          id:1,
-          condition: {icon:'http://cdn.apixu.com/weather/64x64/night/116.png'},
-          temp_c: 99,
-          feelslike_c: 89,
-          text: 'Partly cloudy',
-          name: 'ODESSS'
-        }
-      ]
+      favorites: {}
     }
   }
 }
@@ -47,5 +52,10 @@ export default {
 <style lang="scss">
   .el-card__body{
     padding: 10px;
+  }
+  .favorite-wp{
+    h3{
+      text-align: center;
+    }
   }
 </style>

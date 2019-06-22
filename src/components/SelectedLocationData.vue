@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import {setStorage, getStorage} from '../services/workWithLocalStorage'
 export default {
   name: 'SelectedLocationData',
   props:{
