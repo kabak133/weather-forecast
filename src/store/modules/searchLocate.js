@@ -2,7 +2,8 @@ import { searchLocation } from '@/api/api.searchLocate'
 
 
 const state = {
-  searchResult: []
+  searchResult: [],
+  favoriteLocation:[]
 }
 
 const getters = {
@@ -11,7 +12,8 @@ const getters = {
 
 const mutations = {
   SET_SEARCH_RESULT: (state, data) => state.searchResult = data,
-  CLEAR_SEARCH_RESULT: (state) => state.searchResult = []
+  CLEAR_SEARCH_RESULT: (state) => state.searchResult = [],
+  ADD_TO_FAVORITE_LOCATION: (sate) => state.favoriteLocation = []
 }
 
 const actions = {
@@ -21,6 +23,9 @@ const actions = {
   },
   clearSearchResult: ({commit}) =>{
     commit('CLEAR_SEARCH_RESULT')
+  },
+  addToFavoriteLocation: ({commit}) => {
+
   }
 }
 

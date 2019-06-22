@@ -24,7 +24,6 @@ const actions = {
   },
   SelectedLocationWeather: async ({commit}, payload) =>{
     const data = await getWeather(payload + '&days=7')
-
     commit('SET_LOCATION_WEATHER', data)
     console.log('payload', data)
   }

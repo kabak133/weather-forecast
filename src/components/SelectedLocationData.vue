@@ -1,7 +1,9 @@
 <template>
   <div class="selected-loc">
-
     <el-card class="box-card">
+      <span
+          @click="addFavorite"
+          class="save">Add to favorites <i class="el-icon-star-on"></i></span>
       <div class="name">
         {{currentLocation.name}}
       </div>
@@ -17,6 +19,7 @@
 </template>
 
 <script>
+import {setStorage, getStorage} from '../services/workWithLocalStorage'
 export default {
   name: 'SelectedLocationData',
   props:{
@@ -27,6 +30,11 @@ export default {
   },
   data () {
     return {}
+  },
+  methods:{
+    addFavorite(){
+      this.$store.dispatch('')
+    }
   }
 }
 </script>
@@ -37,12 +45,21 @@ export default {
   max-width: 100%;
   margin: 0 auto 25px;
   font-size: 1.6rem;
-  font-size: 1.6rem;
   font-weight: 500;
   text-align: center;
   line-height: 1.5;
+  position: relative;
   .name{
     font-size: 1.25em;
+  }
+  .save{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 1rem;
+    border-bottom: 1px dashed #000;
+    line-height: 1;
+    cursor: pointer;
   }
 }
 </style>

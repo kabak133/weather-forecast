@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from '@/services/request';
 
 export function searchLocation(payload) {
   return request({
