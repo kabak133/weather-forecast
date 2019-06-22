@@ -6,7 +6,9 @@
           <search-bar/>
           <selected-location/>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <favorite-locations/>
+        </div>
       </div>
     </div>
   </div>
@@ -15,17 +17,19 @@
 <script>
 import SearchBar from './components/SearchBar'
 import SelectedLocation from './components/SelectedLocation'
+import FavoriteLocations from './components/FavoriteLocations'
 
 export default {
   name: 'app',
   components: {
     SelectedLocation,
-    SearchBar
+    SearchBar,
+    FavoriteLocations
   },
   data () {
     return {}
   },
-  beforeCreate(){
+  beforeCreate () {
 
   }
 }

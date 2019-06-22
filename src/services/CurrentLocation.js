@@ -1,8 +1,8 @@
 import store from '../store/'
-import { Message } from 'element-ui';
+import { Message } from 'element-ui'
 
 const Location = {
-  init(){
+  init () {
     this.setFitstData()
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition)
@@ -11,18 +11,18 @@ const Location = {
         message: 'Geolocation is not supported by this browser.',
         type: 'error',
         duration: 5 * 1000
-      });
+      })
     }
-    console.log('navigator.geolocation',navigator.geolocation)
+    console.log('navigator.geolocation', navigator.geolocation)
   },
 
-  setFitstData(){
+  setFitstData () {
     // Set firs data if Geolocate is enable
-    store.dispatch('weather/SelectedLocationWeather', "London")
+    store.dispatch('weather/SelectedLocationWeather', 'London')
   },
   showPosition ({coords}) {
     console.log('gggg')
-    const latLng ={
+    const latLng = {
       lat: coords.latitude,
       lng: coords.longitude
     }
@@ -30,4 +30,4 @@ const Location = {
   }
 }
 
-export default Location;
+export default Location

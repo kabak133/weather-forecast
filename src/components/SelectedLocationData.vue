@@ -33,7 +33,7 @@ export default {
   },
   methods:{
     addFavorite(){
-      this.$store.dispatch('')
+      this.$store.dispatch('searchLocate/addToFavoriteLocation')
     }
   }
 }

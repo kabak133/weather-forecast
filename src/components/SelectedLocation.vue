@@ -7,7 +7,7 @@
           :current-location="currentLocation" />
     </div>
 
-    <el-tabs type="border-card" value="forecast">
+    <el-tabs type="border-card" value="current">
       <el-tab-pane label="Current" name="current">
         <selected-location-simple
             :weather-data="currentLocationWeather" />

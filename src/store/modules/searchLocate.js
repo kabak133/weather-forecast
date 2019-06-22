@@ -1,13 +1,15 @@
 import { searchLocation } from '@/api/api.searchLocate'
 
-
 const state = {
   searchResult: [],
-  favoriteLocation:[]
+  favoriteLocation: []
 }
 
 const getters = {
-  getSearchResult: state => state.searchResult
+  getSearchResult: state => state.searchResult,
+  someGetter (state, getters, rootState, rootGetters) {
+    return rootGetters['weather/getLocationWeather']
+  }
 }
 
 const mutations = {
@@ -21,11 +23,11 @@ const actions = {
     const data = await searchLocation(text)
     commit('SET_SEARCH_RESULT', data)
   },
-  clearSearchResult: ({commit}) =>{
+  clearSearchResult: ({commit}) => {
     commit('CLEAR_SEARCH_RESULT')
   },
-  addToFavoriteLocation: ({commit}) => {
-
+  addToFavoriteLocation: ({commit, getters}) => {
+    console.log('ggg', getters.someGetter)
   }
 }
 
