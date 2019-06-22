@@ -2,20 +2,19 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store/'
 
-import 'bootstrap/scss/bootstrap-reboot.scss'
-import 'bootstrap/scss/bootstrap-grid.scss'
-
-import 'element-ui/lib/theme-chalk/index.css'
 
 import './assets/scss/main.scss'
 
+import filters from './filters/'
+Vue.use(filters)
 
-import { Input, Button, Tabs, TabPane } from 'element-ui'
+import { Input, Button, Tabs, TabPane, Card } from 'element-ui'
 
 Vue.use(Input)
 Vue.use(Button)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Card)
 
 import Location from './services/CurrentLocation'
 

@@ -2,11 +2,11 @@
   <div id="app">
     <div class="container">
       <div class="row mx-5">
-        <div class="col-md-9">
+        <div class="col-lg-10">
           <search-bar/>
           <selected-location/>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-lg-2"></div>
       </div>
     </div>
   </div>
@@ -29,5 +29,7 @@ export default {
 </script>
 
 <style lang="scss">
-  #app {}
+  #app {
+    padding-top: 50px;
+  }
 </style>
