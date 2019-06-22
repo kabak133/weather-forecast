@@ -1,16 +1,16 @@
 <template>
   <div class="current-weather text-center">
     <simple-location-weather :icon-src="weatherData.condition.icon">
-      <div slot="temp" class="temp_curr">{{weatherData.temp_c}}°c</div>
-      <div slot="temp_feel"  class="temp_feel">Feels like {{weatherData.feelslike_c}}°c</div>
-      <div slot="text" class="w_condition">{{weatherData.condition.text}} </div>
+      <div slot="temp">{{weatherData.temp_c}}°c</div>
+      <div slot="temp_feel">Feels like {{weatherData.feelslike_c}}°c</div>
+      <div slot="text">{{weatherData.condition.text}} </div>
     </simple-location-weather>
   </div>
 </template>
 
 <script>
 
-import simpleLocationWeather from '../slots/simpleLocationWeather'
+import simpleLocationWeather from '@/slots/simpleLocationWeather'
 
 export default {
   name: 'SelectedLocationSimple',

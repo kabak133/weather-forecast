@@ -1,10 +1,18 @@
 <template>
   <div class="favorite-wpp">
     <el-card class="box-card">
-      <item-favorite
+
+      <simple-location-weather
           v-for="itm in ttt"
           :weather-data="itm"
-          :key="itm.id"/>
+          :key="itm.id"
+          :icon-src="itm.condition.icon">
+        <div slot="name">{{itm.name}}</div>
+        <div slot="temp">{{itm.temp_c}}°c</div>
+        <div slot="temp_feel">Feels like {{itm.feelslike_c}}°c</div>
+
+      </simple-location-weather>
+
     </el-card>
 
   </div>
@@ -12,12 +20,12 @@
 
 <script>
 
-import SelectedLocationWeatherCurrent from '../components/SelectedLocationWeatherCurrent'
+import simpleLocationWeather from '@/slots/simpleLocationWeather'
 
 export default {
   name: 'FavoriteLocations',
   components: {
-    itemFavorite: SelectedLocationWeatherCurrent
+    simpleLocationWeather
   },
   data () {
     return {
@@ -27,7 +35,8 @@ export default {
           condition: {icon:'http://cdn.apixu.com/weather/64x64/night/116.png'},
           temp_c: 99,
           feelslike_c: 89,
-          text: 'Partly cloudy'
+          text: 'Partly cloudy',
+          name: 'ODESSS'
         }
       ]
     }
@@ -35,6 +44,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+  .el-card__body{
+    padding: 10px;
+  }
 </style>
