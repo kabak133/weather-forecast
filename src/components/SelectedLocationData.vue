@@ -1,5 +1,6 @@
 <template>
   <div class="selected-loc">
+
     <el-card class="box-card">
       <div class="name">
         {{currentLocation.name}}
