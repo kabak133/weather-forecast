@@ -2,9 +2,10 @@
   <div class="favorite-wp">
     <h3>Favorite Location</h3>
     <el-card class="box-card mb-3"
-             v-for="(itm, key) of favoriteLocation"
+             v-for="(itm, key) in favoriteLocation"
              :key="key"
     >
+
       <simple-location-weather
           :icon-src="itm.current.condition.icon">
         <div slot="name"><b>{{itm.location.name}}</b></div>
@@ -29,17 +30,6 @@ export default {
     ...mapGetters({
       favoriteLocation: 'searchLocate/getFavoriteLocation'
     })
-  },
-  watch:{
-    getFavoriteLocation:{
-      handler: function (val, oldVal) {
-        console.log('watch')
-        console.log('val', val)
-        console.log('oldVal',oldVal)
-        this.favorites = val
-      },
-      deep: true
-    }
   },
   data () {
     return {

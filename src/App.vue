@@ -18,6 +18,7 @@
 import SearchBar from './components/SearchBar'
 import SelectedLocation from './components/SelectedLocation'
 import FavoriteLocations from './components/FavoriteLocations'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
