@@ -1,8 +1,8 @@
 import Vue from 'vue'
 
-
 import { searchLocation } from '@/api/api.searchLocate'
-import { setStorage, getStorage } from '../../services/workWithLocalStorage'
+import { setStorage, getStorage, deleteStorage } from '../../services/workWithLocalStorage'
+import { FAVORITE_LOC_KEY } from '../constants'
 
 const state = {
   searchResult: [],
@@ -39,10 +39,13 @@ const actions = {
     }
     let key = (`${currentLocationData.location.region} ${currentLocationData.location.name}`).replace(/ /ig, '%20')
     commit('ADD_TO_FAVORITE_LOCATION', {data: currentLocationData, key})
+
+    //Save to Storage
+    setStorage(FAVORITE_LOC_KEY, {[key]:currentLocationData})
   },
   deleteFavoriteLocation: ({commit}, key) =>{
-    console.log(key)
     commit('DELETE_FAVORITE_LOCATION', key)
+    deleteStorage(FAVORITE_LOC_KEY, key)
   }
 }
 

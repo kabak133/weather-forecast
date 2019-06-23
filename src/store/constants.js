@@ -1,0 +1,1 @@
+export const FAVORITE_LOC_KEY = 'favorite_locations'

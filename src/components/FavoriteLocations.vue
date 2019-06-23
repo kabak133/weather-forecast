@@ -6,7 +6,6 @@
                v-for="(itm, key) in favoriteLocation"
                :key="itm.location + key"
       >
-
         <simple-location-weather
             :icon-src="itm.current.condition.icon">
           <div slot="name"><b>{{itm.location.name}}</b></div>
