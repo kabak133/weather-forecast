@@ -32,7 +32,7 @@ export default {
   },
   methods:{
     addFavorite(){
-      this.$store.dispatch('searchLocate/addToFavoriteLocation')
+      this.$store.dispatch('favoriteLocations/addToFavoriteLocation')
     }
   }
 }

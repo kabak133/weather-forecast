@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      favoriteLocation: 'searchLocate/getFavoriteLocation'
+      favoriteLocation: 'favoriteLocations/getFavoriteLocation'
     })
   },
   data () {
@@ -39,7 +39,7 @@ export default {
   },
   methods:{
     deleteLocation(key){
-      this.$store.dispatch('searchLocate/deleteFavoriteLocation', key)
+      this.$store.dispatch('favoriteLocations/deleteFavoriteLocation', key)
     }
 
   }
