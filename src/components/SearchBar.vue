@@ -70,8 +70,11 @@ export default {
     },
     chooseLocation(name){
       this.searchValue = name
-      this.$store.dispatch('weather/SelectedLocationWeather',  name)
-      this.$store.dispatch('searchLocate/clearSearchResult')
+      if (name.length > 2) {
+        this.$store.dispatch('weather/SelectedLocationWeather',  name)
+        this.$store.dispatch('searchLocate/clearSearchResult')
+      }
+
     }
   }
 
