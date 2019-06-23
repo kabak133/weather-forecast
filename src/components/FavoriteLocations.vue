@@ -2,9 +2,10 @@
   <div class="favorite-wp">
     <h3>Favorite Location</h3>
     <transition-group name="list" tag="p">
-      <el-card class="box-card mb-3"
+      <el-card class="box-card-favorite mb-3"
                v-for="(itm, key) in favoriteLocation"
                :key="itm.location + key"
+               @click.native="chooseLocation(key)"
       >
         <simple-location-weather
             :icon-src="itm.current.condition.icon">
@@ -12,7 +13,7 @@
           <div slot="temp">{{itm.current.temp_c}}°c</div>
           <div slot="temp_feel">Feels like {{itm.current.feelslike_c}}°c</div>
         </simple-location-weather>
-        <i class="el-icon-close del" @click="deleteLocation(key)"></i>
+        <i class="el-icon-close del" @clickю.stop="deleteLocation(key)"></i>
       </el-card>
     </transition-group>
   </div>
@@ -37,12 +38,15 @@ export default {
       favorites: {}
     }
   },
-  created(){
+  created () {
     this.$store.dispatch('favoriteLocations/setFirstData')
   },
-  methods:{
-    deleteLocation(key){
+  methods: {
+    deleteLocation (key) {
       this.$store.dispatch('favoriteLocations/deleteFavoriteLocation', key)
+    },
+    chooseLocation (key) {
+      this.$store.dispatch('weather/SelectedLocationWeather', key)
     }
   }
 }
@@ -51,8 +55,15 @@ export default {
 <style lang="scss">
   @import "../assets/scss/varitable";
 
-  .box-card {
+  .box-card-favorite {
     position: relative;
+    cursor: pointer;
+    &.el-card.is-always-shadow {
+      &:hover {
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3);
+      }
+    }
+
     .del {
       position: absolute;
       top: 5px;
@@ -77,14 +88,17 @@ export default {
   .el-card__body {
     padding: 10px;
   }
+
   .list-item {
     display: inline-block;
     margin-right: 10px;
   }
+
   .list-enter-active, .list-leave-active {
     transition: all 1s;
   }
-  .list-enter, .list-leave-to  {
+
+  .list-enter, .list-leave-to {
     opacity: 0;
     transform: translateY(30px);
   }
