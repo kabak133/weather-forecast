@@ -1,3 +1,6 @@
+import Vue from 'vue'
+
+
 import { searchLocation } from '@/api/api.searchLocate'
 import { setStorage, getStorage } from '../../services/workWithLocalStorage'
 
@@ -17,7 +20,8 @@ const getters = {
 const mutations = {
   SET_SEARCH_RESULT: (state, data) => state.searchResult = data,
   CLEAR_SEARCH_RESULT: (state) => state.searchResult = [],
-  ADD_TO_FAVORITE_LOCATION: (sate, {data, key}) => state.favoriteLocation = {...state.favoriteLocation, [key]: data}
+  ADD_TO_FAVORITE_LOCATION: (state, {data, key}) => state.favoriteLocation = {...state.favoriteLocation, [key]: data},
+  DELETE_FAVORITE_LOCATION: (state, key) => Vue.delete(state.favoriteLocation, key)
 }
 
 const actions = {
@@ -33,11 +37,12 @@ const actions = {
       location: getters.getCurrentLocationWeather.location,
       current: getters.getCurrentLocationWeather.current,
     }
-
     let key = (`${currentLocationData.location.region} ${currentLocationData.location.name}`).replace(/ /ig, '%20')
     commit('ADD_TO_FAVORITE_LOCATION', {data: currentLocationData, key})
-    console.log('ADD_TO_FAVORITE_LOCATION')
-
+  },
+  deleteFavoriteLocation: ({commit}, key) =>{
+    console.log(key)
+    commit('DELETE_FAVORITE_LOCATION', key)
   }
 }
 

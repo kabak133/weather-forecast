@@ -3,8 +3,8 @@
     <h3>Favorite Location</h3>
     <transition-group name="list" tag="p">
       <el-card class="box-card mb-3"
-               v-for="itm in favoriteLocation"
-               :key="itm.location + itm.name"
+               v-for="(itm, key) in favoriteLocation"
+               :key="itm.location + key"
       >
 
         <simple-location-weather
@@ -13,7 +13,7 @@
           <div slot="temp">{{itm.current.temp_c}}°c</div>
           <div slot="temp_feel">Feels like {{itm.current.feelslike_c}}°c</div>
         </simple-location-weather>
-        <i class="el-icon-close del"></i>
+        <i class="el-icon-close del" @click="deleteLocation(key)"></i>
       </el-card>
     </transition-group>
   </div>
@@ -37,6 +37,12 @@ export default {
     return {
       favorites: {}
     }
+  },
+  methods:{
+    deleteLocation(key){
+      this.$store.dispatch('searchLocate/deleteFavoriteLocation', key)
+    }
+
   }
 }
 </script>
