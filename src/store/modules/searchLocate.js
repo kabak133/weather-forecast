@@ -1,6 +1,6 @@
-import Vue from 'vue'
-
 import { searchLocation } from '@/api/api.searchLocate'
+import { getWeather } from '@/api/api.weather'
+
 
 const state = {
   searchResult: [],

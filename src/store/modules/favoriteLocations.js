@@ -1,6 +1,7 @@
-import { deleteStorage, setStorage } from '../../services/workWithLocalStorage'
-import { FAVORITE_LOC_KEY } from '../constants'
 import Vue from 'vue'
+import { deleteStorage, setStorage, getStorage } from '../../services/workWithLocalStorage'
+import { getWeather } from '@/api/api.weather'
+import { FAVORITE_LOC_KEY } from '../constants'
 
 const state = {
   favoriteLocation: {}
@@ -15,7 +16,8 @@ const getters = {
 
 const mutations = {
   ADD_TO_FAVORITE_LOCATION: (state, {data, key}) => state.favoriteLocation = {...state.favoriteLocation, [key]: data},
-  DELETE_FAVORITE_LOCATION: (state, key) => Vue.delete(state.favoriteLocation, key)
+  DELETE_FAVORITE_LOCATION: (state, key) => Vue.delete(state.favoriteLocation, key),
+  SET_FIRST_DATA: (state, data) => state.favoriteLocation = {...state.favoriteLocation, ...data}
 }
 
 const actions = {
@@ -25,15 +27,39 @@ const actions = {
       current: getters.getCurrentLocationWeather.current,
     }
     let key = (`${currentLocationData.location.region} ${currentLocationData.location.name}`).replace(/ /ig, '%20')
-    commit('ADD_TO_FAVORITE_LOCATION', {data: currentLocationData, key})
+    commit('ADD_TO_FAVORITE_LOCATION', collectionData(getters.getCurrentLocationWeather))
 
     //Save to Storage
-    setStorage(FAVORITE_LOC_KEY, {[key]:currentLocationData})
+    console.log('key', key)
+    setStorage(FAVORITE_LOC_KEY, {[key]: currentLocationData})
+
   },
-  deleteFavoriteLocation: ({commit}, key) =>{
+  deleteFavoriteLocation: ({commit}, key) => {
     commit('DELETE_FAVORITE_LOCATION', key)
     deleteStorage(FAVORITE_LOC_KEY, key)
+  },
+  setFirstData: ({commit, dispatch}) => {
+    let favorites = getStorage(FAVORITE_LOC_KEY)
+    commit('SET_FIRST_DATA', favorites)
+    if (Object.keys(favorites).length) {
+      dispatch('updateFirstData', Object.keys(favorites))
+    }
+  },
+  updateFirstData: ({commit, dispatch}, payload) => {
+    console.log('payload', payload)
+    Promise.all(payload.map(getWeather))
+    .then(results => {
+      console.log(results)
+      results.forEach((itm) => commit('ADD_TO_FAVORITE_LOCATION', collectionData(itm)))
+    })
   }
+}
+
+function collectionData ({location, current}) {
+  let smallData = {location, current}
+  let key = (`${location.region} ${location.name}`).replace(/ /ig, '%20')
+  return {data: smallData, key}
+
 }
 
 export default {

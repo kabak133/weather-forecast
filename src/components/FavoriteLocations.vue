@@ -37,11 +37,13 @@ export default {
       favorites: {}
     }
   },
+  created(){
+    this.$store.dispatch('favoriteLocations/setFirstData')
+  },
   methods:{
     deleteLocation(key){
       this.$store.dispatch('favoriteLocations/deleteFavoriteLocation', key)
     }
-
   }
 }
 </script>
