@@ -31,13 +31,13 @@ service.interceptors.response.use(
     const { data } = error.response;
     let message;
     if (data) {
-      message = data.message;
+      message = data.error.message;
     } else {
       message = error.message;
     }
     Message({
       message: message,
-      type: 'error',
+      type: 'warning',
       duration: 5 * 1000
     });
 

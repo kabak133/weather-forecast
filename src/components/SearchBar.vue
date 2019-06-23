@@ -5,19 +5,19 @@
         v-model="searchValue"
         class="input-with-select"
         @input="autocomplete(searchValue)"
-        @keyup.enter.native="searchLocation(searchValue)"
+        @keyup.enter.native="chooseLocation(searchValue)"
     >
       <el-button
           slot="append"
           icon="el-icon-search"
-          @click="searchLocation(searchValue)"></el-button>
+          @click="chooseLocation(searchValue)"></el-button>
     </el-input>
     <div class="result-autocomplete"
          v-click-outside="outside"
          v-show="getSearchResult.length">
       <ul>
         <li v-for="item in getSearchResult"
-            @click.stop="chooseLocation(item)"
+            @click.stop="chooseLocation(item.name)"
             :key="item.id">
           {{item.name}}
         </li>
@@ -63,15 +63,12 @@ export default {
     outside: function(e) {
       this.$store.dispatch('searchLocate/clearSearchResult')
     },
-    searchLocation (searchValue) {
-      console.log('searchValue', searchValue)
-    },
     autocomplete () {
       if (this.searchValue.length > 2) {
         this.debounceAutocomplete()
       }
     },
-    chooseLocation({name}){
+    chooseLocation(name){
       this.searchValue = name
       this.$store.dispatch('weather/SelectedLocationWeather',  name)
       this.$store.dispatch('searchLocate/clearSearchResult')

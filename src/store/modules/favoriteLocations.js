@@ -30,7 +30,6 @@ const actions = {
     commit('ADD_TO_FAVORITE_LOCATION', collectionData(getters.getCurrentLocationWeather))
 
     //Save to Storage
-    console.log('key', key)
     setStorage(FAVORITE_LOC_KEY, {[key]: currentLocationData})
 
   },
@@ -46,10 +45,8 @@ const actions = {
     }
   },
   updateFirstData: ({commit, dispatch}, payload) => {
-    console.log('payload', payload)
     Promise.all(payload.map(getWeather))
     .then(results => {
-      console.log(results)
       results.forEach((itm) => commit('ADD_TO_FAVORITE_LOCATION', collectionData(itm)))
     })
   }
