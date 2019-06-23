@@ -40,7 +40,7 @@ const actions = {
   setFirstData: ({commit, dispatch}) => {
     let favorites = getStorage(FAVORITE_LOC_KEY)
     commit('SET_FIRST_DATA', favorites)
-    if (Object.keys(favorites).length) {
+    if (favorites !== null && Object.keys(favorites).length) {
       dispatch('updateFirstData', Object.keys(favorites))
     }
   },
