@@ -39,7 +39,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.box-card{
+  @import "../assets/scss/varitable";
+
+  .box-card{
   width: 480px;
   max-width: 100%;
   margin: 0 auto 25px;
@@ -56,9 +58,13 @@ export default {
     top: 5px;
     right: 5px;
     font-size: 1rem;
-    border-bottom: 1px dashed #000;
+    border-bottom: 1px dashed $back;
     line-height: 1;
     cursor: pointer;
+    &:hover{
+      color: $accent-color;
+      border-bottom-color: $accent-color;
+    }
   }
 }
 </style>

@@ -1,19 +1,21 @@
 <template>
   <div class="favorite-wp">
     <h3>Favorite Location</h3>
-    <el-card class="box-card mb-3"
-             v-for="(itm, key) in favoriteLocation"
-             :key="key"
-    >
+    <transition-group name="list" tag="p">
+      <el-card class="box-card mb-3"
+               v-for="itm in favoriteLocation"
+               :key="itm.location + itm.name"
+      >
 
-      <simple-location-weather
-          :icon-src="itm.current.condition.icon">
-        <div slot="name"><b>{{itm.location.name}}</b></div>
-        <div slot="temp">{{itm.current.temp_c}}°c</div>
-        <div slot="temp_feel">Feels like {{itm.current.feelslike_c}}°c</div>
-      </simple-location-weather>
-    </el-card>
-
+        <simple-location-weather
+            :icon-src="itm.current.condition.icon">
+          <div slot="name"><b>{{itm.location.name}}</b></div>
+          <div slot="temp">{{itm.current.temp_c}}°c</div>
+          <div slot="temp_feel">Feels like {{itm.current.feelslike_c}}°c</div>
+        </simple-location-weather>
+        <i class="el-icon-close del"></i>
+      </el-card>
+    </transition-group>
   </div>
 </template>
 
@@ -26,7 +28,7 @@ export default {
   components: {
     simpleLocationWeather
   },
-  computed:{
+  computed: {
     ...mapGetters({
       favoriteLocation: 'searchLocate/getFavoriteLocation'
     })
@@ -40,12 +42,50 @@ export default {
 </script>
 
 <style lang="scss">
-  .el-card__body{
+  @import "../assets/scss/varitable";
+
+  .box-card {
+    position: relative;
+    .del {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
+      font-size: 10px;
+      text-align: center;
+      line-height: 15px;
+      font-weight: 700;
+      background: $back;
+      color: #fff;
+      opacity: 0.8;
+      &:hover {
+        background: $accent-color;
+
+      }
+    }
+  }
+
+  .el-card__body {
     padding: 10px;
   }
-  .favorite-wp{
-    h3{
+  .list-item {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to  {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .favorite-wp {
+    h3 {
       text-align: center;
+      font-size: 1.6rem;
     }
   }
 </style>
