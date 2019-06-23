@@ -13,7 +13,7 @@
           <div slot="temp">{{itm.current.temp_c}}°c</div>
           <div slot="temp_feel">Feels like {{itm.current.feelslike_c}}°c</div>
         </simple-location-weather>
-        <i class="el-icon-close del" @clickю.stop="deleteLocation(key)"></i>
+        <i class="el-icon-close del" @click.stop="deleteLocation(key)"></i>
       </el-card>
     </transition-group>
   </div>
