@@ -9,14 +9,11 @@ npm run build
 # переход в каталог сборки
 cd dist
 
-# если вы публикуете на пользовательский домен
-# echo 'www.example.com' > CNAME
-
 git init
 git add -A
 git commit -m 'deploy'
 
-git push -f git@github.com:kabak133/weather-forecast.git
+#git push -f git@github.com:kabak133/weather-forecast.git
 
 
 cd -
